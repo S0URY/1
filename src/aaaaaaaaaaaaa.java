@@ -10,9 +10,9 @@ public class aaaaaaaaaaaaa {
 
         System.out.println(angka);
             if (angka >=1 && angka <= 50){
-                System.out.println("Rush E");
+                System.out.println("Mococo");
             } else {
-                System.out.println("Rush B");
+                System.out.println("Fuwawa");
 
             }
         }
