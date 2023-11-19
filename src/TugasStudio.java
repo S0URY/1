@@ -3,47 +3,41 @@ import java.util.Scanner;
 public class TugasStudio {
     public static void main(String[] args) {
         Scanner a = new Scanner(System.in);
-        int kloter = a.nextInt();
-        int i=0;
-        while (kloter < 1 || kloter > 10) {
-            kloter = a.nextInt();
+        int batas = a.nextInt();
+        int[][] awei = new int[batas][2];
+        int temp = 0;
+        int tempy = 0;
+        for (int x = 0; x < awei.length; x++) {
+            for (int y = 0; y < awei[x].length; y++) {
+                awei[x][y] = a.nextInt();
+
+            }
+
         }
-        int[][] tamekloter = new int[kloter][2];
-        for ( i = 0; i < kloter; i++) {
-            tamekloter[i][0] = readValidInput(a);
-            tamekloter[i][1] = readValidInput(a);
+        for (int x = 0; x < awei.length; x++) {
+            if(awei[x][0]>temp){
+                temp = awei[x][0];
+                tempy = x;
+            }
         }
-        int tempy = findMinProcessingTime(tamekloter);
-        System.out.println(tempy);
-    }
-    private static int readValidInput(Scanner scanner) {
-        int input = scanner.nextInt();
-        while (input < 2 || input > 1000) {
-            input = scanner.nextInt();
-        }
-        return input;
-    }
-    private static int findMinProcessingTime(int[][] tamekloter) {
-        int tempy = findMaxWaitingTime(tamekloter);
-        while (true) {
-            boolean temporn = true;
-            for (int[] batch : tamekloter) {
-                if ((tempy - batch[1]) % batch[0] != 0) {
-                    temporn = false;
+        int pempin = temp + awei[tempy][1];
+        boolean ceky = false;
+        boolean tempor = false;
+        while(!tempor){
+            for (int x = 0; x < awei.length; x++) {
+                if (pempin % awei[x][0] == awei[x][1]) {
+                    ceky = true;
+                } else {
+                    ceky = false;
                     break;
                 }
             }
-            if (temporn) {
-                return tempy;
+            if (ceky) {
+                System.out.println(pempin);
+                tempor = true;
+            }else{
+                pempin+=temp;
             }
-            tempy++;
         }
-    }
-    private static int findMaxWaitingTime(int[][] tamekloter) {
-        int tempoor = Integer.MIN_VALUE;
-        for (int[] batch : tamekloter) {
-            tempoor = Math.max(tempoor, batch[1]);
-        }
-        return tempoor;
     }
 }
